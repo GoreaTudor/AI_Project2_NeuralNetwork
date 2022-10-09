@@ -6,32 +6,37 @@ using System.Threading.Tasks;
 
 namespace NeuralNetwork.AI {
     class Neuron {
-        Layer parent;
-        private List <Double> weights;
+        private Layer parent;
+        public int layerNumber { get; set; }    // layer ID 
+        public int neuronNumber { get; set; }   // neuron ID
+        public List <Double> weights { get; set; }
 
-        public Neuron() {}
+        public Neuron(Layer parent, int layerNumber, int neuronNumber, int nrOfWeights) {
+            this.parent = parent;
+            this.layerNumber = layerNumber;
+            this.neuronNumber = neuronNumber;
 
-        public Neuron(int nrOfWeights) {
-            this.weights = new List <Double>(nrOfWeights);
+            this.weights = new List <Double> (nrOfWeights);
             for (int i = 0; i < nrOfWeights; i++) {
-                this.weights[i] = 0;
+                this.weights[i] = GlobalStuff.initialWeightValue;
             }
         }
 
-        public void setWeights(List<Double> weights) {
-            this.weights = weights;
-        }
-
         public Double getOutputValue(List <Double> inputs) {
-            Function<List <Double>, Double> inputFunction = parent.getInputFunction();
-            Function<Double, Double> activationFunction = parent.getActivationFunction();
-            Function<Double, Double> outputFunction = parent.getOutputFunction();
-
-            Double generalInput = inputFunction(inputs);
-            Double activationValue = activationFunction(generalInput);
-            Double outputValue = outputFunction(activationValue);
+            Double generalInput = parent.InputFunction(inputs);
+            Double activationValue = parent.ActivationFunction(generalInput);
+            Double outputValue = parent.OutputFunction(activationValue);
 
             return outputValue;
+        }
+
+        public void increaseNumberOfWeights () {
+            this.weights.Add(GlobalStuff.initialWeightValue);
+        }
+
+        public void decreaseNumberOfWeights () {
+            int lastPosition = this.weights.Count - 1;
+            this.weights.RemoveAt(lastPosition);
         }
     }
 }

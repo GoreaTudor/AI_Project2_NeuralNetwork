@@ -6,28 +6,66 @@ using System.Threading.Tasks;
 
 namespace NeuralNetwork.AI {
     class Layer {
-        private Function <List<Double>, Double> InputFunction;
-        private Function <Double, Double> ActivationFunction;
+        public Function <List<Double>, Double> InputFunction { get; set; }
+        public Function <Double, Double> ActivationFunction { get; set; }
+        public Function <Double, Double> OutputFunction { get; set; }
         private ActivationFunction ActivationFunctionType;
-        private Function <Double, Double> OutputFunction;
 
         private MyNeuralNetwork parent;
-        private Neuron[] neurons;
-        private Double theta;
-        private Double g;
+        private int layerNumber;
+        private List <Neuron> neurons;
+        private Double theta = 0.0;
+        private Double g = 1.0;
         
 
-        public Layer(MyNeuralNetwork parent) {
+        public Layer(MyNeuralNetwork parent, int layerNumber) {
             this.parent = parent;
+            this.layerNumber = layerNumber;
+            this.neurons = new List<Neuron>();
 
             /// Default values ///
             setInputFunction(AI.InputFunction.Sum);
-            setActivationFunction(AI.ActivationFunction.Sigmoid, 0.0, 1.0);
+            if (layerNumber < 0) {
+                setActivationFunction(AI.ActivationFunction.Identity, 0.0, 1.0);
+            } else {
+                setActivationFunction(AI.ActivationFunction.Sigmoid, 0.0, 1.0);
+            }
             setOutputFunction(AI.OutputFunction.Real);
         }
 
-        public List<Double> feedThroughLayer (List<Double> inputs) {
-            return null;
+
+        public List <Double> feedThroughLayer (List <Double> inputs) {
+            int count = neurons.Count;
+            List <Double> output = new List <Double> (count);
+
+            for (int i = 0; i < count; i++) {
+                output[i] = neurons[i].getOutputValue(inputs);
+            }
+
+            return output;
+        }
+
+
+        public void increaseNumberOfNeurons () {
+            Neuron neuron = new Neuron(this, layerNumber, this.neurons.Count, this.neurons[0].weights.Count);
+            this.neurons.Add(neuron);
+        }
+
+        public void decreaseNumberOfNeurons () {
+            int lastPosition = this.neurons.Count - 1;
+            this.neurons.RemoveAt(lastPosition);
+        }
+
+        public void increaseNumberOfWeights () {
+            for (int i = 0; i < this.neurons.Count; i++) {
+                neurons[i].increaseNumberOfWeights();
+            }
+        }
+
+        public void decreaseNumberOfWeights () {
+            for (int i = 0; i < this.neurons.Count; i++) {
+                neurons[i].decreaseNumberOfWeights();
+            }
         }
 
 
@@ -124,6 +162,13 @@ namespace NeuralNetwork.AI {
                         return g * x;
                     });
                 } break;
+
+                case AI.ActivationFunction.Identity: {
+                    ActivationFunction = (x => {
+                        return x;
+                    });
+                }
+                break;
             }
         }
 
@@ -142,19 +187,6 @@ namespace NeuralNetwork.AI {
                     OutputFunction = (x => ((x < 0.0) ? -1.0 : 1.0));
                 }
             }
-        }
-
-
-        public Function <List<Double>, Double> getInputFunction () {
-            return InputFunction;
-        }
-
-        public Function<Double, Double> getActivationFunction () {
-            return ActivationFunction;
-        }
-
-        public Function<Double, Double> getOutputFunction () {
-            return OutputFunction;
         }
     }
 }

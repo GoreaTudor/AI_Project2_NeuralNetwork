@@ -36,7 +36,7 @@ namespace NeuralNetwork.GUI {
             this.btn_layerOptions.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_layerOptions.Location = new System.Drawing.Point(10, 39);
             this.btn_layerOptions.Name = "btn_layerOptions";
-            this.btn_layerOptions.Size = new System.Drawing.Size(90, 40);
+            this.btn_layerOptions.Size = new System.Drawing.Size(100, 40);
             this.btn_layerOptions.TabIndex = 0;
             this.btn_layerOptions.Text = "Options";
             this.btn_layerOptions.UseVisualStyleBackColor = true;
