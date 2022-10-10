@@ -7,16 +7,16 @@ using System.Threading.Tasks;
 namespace NeuralNetwork.AI {
     public delegate TResult Function <Tparam, TResult> (Tparam param);
 
-    enum InputFunction {
+    public enum InputFunction {
         Sum, Prod, Min, Max
     }
 
-    enum ActivationFunction {
+    public enum ActivationFunction {
         Step, Sign, Sigmoid, TanH, Linear, 
         Identity // for input layer
     }
 
-    enum OutputFunction {
+    public enum OutputFunction {
         Real, Binary
     }
 }

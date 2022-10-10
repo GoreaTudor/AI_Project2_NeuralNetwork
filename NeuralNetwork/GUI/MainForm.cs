@@ -23,26 +23,28 @@ namespace NeuralNetwork {
         public MainForm() {
             InitializeComponent();
 
-            UserControlLayer inputLayer = new UserControlLayer(-1);
+            UserControlLayer inputLayer = new UserControlLayer(network, -1);
             IL_flowLayoutPanel.Controls.Add(inputLayer);
 
-            UserControlLayer outputLayer = new UserControlLayer(0);
+            UserControlLayer outputLayer = new UserControlLayer(network, 0);
             OL_flowLayoutPanel.Controls.Add(outputLayer);
 
             addHiddenLayer();
         }
 
         private void btn_add_Click (object sender, EventArgs e) {
+            network.increaseNumberOfHiddenLayers();
             addHiddenLayer();
         }
 
         private void btn_delete_Click (object sender, EventArgs e) {
+            network.decreaseNumberOfHiddenLayers();
             deleteHiddenLayer();
         }
 
         private void addHiddenLayer () {
             numberOfHiddenLayers++;
-            UserControlLayer control = new UserControlLayer(numberOfHiddenLayers);
+            UserControlLayer control = new UserControlLayer(network, numberOfHiddenLayers);
             hiddenFlowLayoutPanel.Controls.Add(control);
         }
 

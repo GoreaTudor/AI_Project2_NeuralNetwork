@@ -16,10 +16,10 @@ namespace NeuralNetwork.GUI {
         private int layerNumber;
         private int numberOfNeurons = 0;
 
-        public UserControlLayer (int layerNumber) {
+        public UserControlLayer (MyNeuralNetwork network, int layerNumber) {
             InitializeComponent();
 
-            //this.network = network;
+            this.network = network;
             this.layerNumber = layerNumber;
             this.lbl_layerName.Text = getName();
 
@@ -49,9 +49,24 @@ namespace NeuralNetwork.GUI {
             return name;
         }
 
-        private void btn_add_Click (object sender, EventArgs e) { addNeuron(); }
-        private void btn_delete_Click (object sender, EventArgs e) { deleteNeuron(); }
-        private void btn_layerOptions_Click (object sender, EventArgs e) { options(); }
+
+        private void btn_add_Click (object sender, EventArgs e) {
+            network.increaseNumberOfNeurons(layerNumber);
+            addNeuron(); 
+        }
+
+        private void btn_delete_Click (object sender, EventArgs e) {
+            if (numberOfNeurons > 1) {
+                network.decreaseNumberOfNeurons(layerNumber);
+            }
+            
+            deleteNeuron(); 
+        }
+
+        private void btn_layerOptions_Click (object sender, EventArgs e) { 
+            options(); 
+        }
+
 
         private void addNeuron() {
             MyButton button = new MyButton(layerNumber, numberOfNeurons);

@@ -9,7 +9,10 @@ namespace NeuralNetwork.AI {
         public Function <List<Double>, Double> InputFunction { get; set; }
         public Function <Double, Double> ActivationFunction { get; set; }
         public Function <Double, Double> OutputFunction { get; set; }
+
+        private InputFunction InputFunctionType;
         private ActivationFunction ActivationFunctionType;
+        private OutputFunction OutputFunctionType;
 
         private MyNeuralNetwork parent;
         private int layerNumber;
@@ -24,7 +27,8 @@ namespace NeuralNetwork.AI {
             this.neurons = new List<Neuron>();
 
             // TODO  -  add first neuron
-            ;
+            Neuron firstNeuron = new Neuron(this, layerNumber, 0, 1);
+            this.neurons.Add(firstNeuron);
 
             /// Default functions ///
             setInputFunction(AI.InputFunction.Sum);
@@ -83,6 +87,8 @@ namespace NeuralNetwork.AI {
 
 
         public void setInputFunction (InputFunction function) {
+            this.InputFunctionType = function;
+
             switch (function) {
                 case AI.InputFunction.Sum: {
                     InputFunction = weightedInputs => {
@@ -135,7 +141,7 @@ namespace NeuralNetwork.AI {
         }
 
         public void setActivationFunction (ActivationFunction function, Double theta, Double g) {
-            ActivationFunctionType = function;
+            this.ActivationFunctionType = function;
             this.theta = theta;
             this.g = g;
 
@@ -186,6 +192,8 @@ namespace NeuralNetwork.AI {
         }
 
         public void setOutputFunction (OutputFunction function) {
+            this.OutputFunctionType = function;
+
             if (function == AI.OutputFunction.Real 
                 || ActivationFunctionType == AI.ActivationFunction.Step 
                 || ActivationFunctionType == AI.ActivationFunction.Sign

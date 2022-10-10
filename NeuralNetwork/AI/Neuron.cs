@@ -53,10 +53,23 @@ namespace NeuralNetwork.AI {
             this.weights.RemoveAt(lastPosition);
         }
 
+
         public void setNumberOfWeights (int nrOfWeights) {
             this.weights = new List <Double> ();
-            for (int i = 0; i < nrOfWeights; i++) {
-                this.weights.Add(GlobalStuff.initialWeightValue);
+            
+            if (this.layerNumber < 0) { // IL
+                for (int i = 0; i < nrOfWeights; i++) {
+                    if (i == neuronNumber) {
+                        this.weights.Add(1.0);
+                    } else {
+                        this.weights.Add(0.0);
+                    }
+                }
+
+            } else { // HL or OL
+                for (int i = 0; i < nrOfWeights; i++) {
+                    this.weights.Add(GlobalStuff.initialWeightValue);
+                }
             }
         }
 
