@@ -16,27 +16,52 @@ namespace NeuralNetwork.AI {
             this.layerNumber = layerNumber;
             this.neuronNumber = neuronNumber;
 
-            this.weights = new List <Double> (nrOfWeights);
-            for (int i = 0; i < nrOfWeights; i++) {
-                this.weights[i] = GlobalStuff.initialWeightValue;
-            }
+            setNumberOfWeights(nrOfWeights);
         }
 
         public Double getOutputValue(List <Double> inputs) {
-            Double generalInput = parent.InputFunction(inputs);
+            Double generalInput = parent.InputFunction(getWeightedInputs(inputs));
             Double activationValue = parent.ActivationFunction(generalInput);
             Double outputValue = parent.OutputFunction(activationValue);
 
             return outputValue;
         }
 
+        private List <Double> getWeightedInputs (List <Double> inputs) {
+            List <Double> weightedInputs = new List <Double> ();
+            for (int i = 0; i < inputs.Count; i++) {
+                weightedInputs.Add(inputs[i] * weights[i]);
+            }
+            return weightedInputs;
+        }
+
+
         public void increaseNumberOfWeights () {
-            this.weights.Add(GlobalStuff.initialWeightValue);
+            if (layerNumber < 0) { // IL
+                if (neuronNumber == weights.Count) {
+                    this.weights.Add(1.0);
+                } else {
+                    this.weights.Add(0.0);
+                }
+            } else { // HL or OL
+                this.weights.Add(GlobalStuff.initialWeightValue);
+            }
         }
 
         public void decreaseNumberOfWeights () {
             int lastPosition = this.weights.Count - 1;
             this.weights.RemoveAt(lastPosition);
+        }
+
+        public void setNumberOfWeights (int nrOfWeights) {
+            this.weights = new List <Double> ();
+            for (int i = 0; i < nrOfWeights; i++) {
+                this.weights.Add(GlobalStuff.initialWeightValue);
+            }
+        }
+
+        public int getNumberOfWeights () {
+            return this.weights.Count;
         }
     }
 }

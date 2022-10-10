@@ -23,7 +23,10 @@ namespace NeuralNetwork.AI {
             this.layerNumber = layerNumber;
             this.neurons = new List<Neuron>();
 
-            /// Default values ///
+            // TODO  -  add first neuron
+            ;
+
+            /// Default functions ///
             setInputFunction(AI.InputFunction.Sum);
             if (layerNumber < 0) {
                 setActivationFunction(AI.ActivationFunction.Identity, 0.0, 1.0);
@@ -35,11 +38,10 @@ namespace NeuralNetwork.AI {
 
 
         public List <Double> feedThroughLayer (List <Double> inputs) {
-            int count = neurons.Count;
-            List <Double> output = new List <Double> (count);
+            List <Double> output = new List <Double> ();
 
-            for (int i = 0; i < count; i++) {
-                output[i] = neurons[i].getOutputValue(inputs);
+            foreach (Neuron neuron in neurons) {
+                output.Add(neuron.getOutputValue(inputs));
             }
 
             return output;
@@ -66,6 +68,17 @@ namespace NeuralNetwork.AI {
             for (int i = 0; i < this.neurons.Count; i++) {
                 neurons[i].decreaseNumberOfWeights();
             }
+        }
+
+
+        public void setNumberOfWeights (int nrOfWeights) {
+            for (int i = 0; i < this.neurons.Count; i++) {
+                neurons[i].setNumberOfWeights(nrOfWeights);
+            }
+        }
+
+        public int getNumberOfWeights () {
+            return neurons[0].getNumberOfWeights();
         }
 
 

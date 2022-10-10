@@ -8,10 +8,17 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using NeuralNetwork.GUI;
+using NeuralNetwork.AI;
 
 namespace NeuralNetwork {
     public partial class MainForm : Form {
+        /// <summary>
+        /// The neural network is generated when the app opens and the MainForm saves a reference to the network.
+        /// </summary>
+        private MyNeuralNetwork network = new MyNeuralNetwork(); 
+
         private int numberOfHiddenLayers = 0;
+        
 
         public MainForm() {
             InitializeComponent();

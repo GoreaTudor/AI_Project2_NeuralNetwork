@@ -14,7 +14,7 @@ namespace NeuralNetwork.AI {
             inputLayer = new Layer(this, -1);
 
             hiddenLayers = new List<Layer>();
-            hiddenLayers[0] = new Layer(this, 1);
+            hiddenLayers.Add(new Layer(this, 1));
 
             outputLayer = new Layer(this, 0);
         }
@@ -88,13 +88,26 @@ namespace NeuralNetwork.AI {
             }
         }
 
-
+        /// <summary>
+        /// Adds a new layer <b>at the end</b> of the list of hidden layers
+        /// </summary>
         public void increaseNumberOfHiddenLayers () {
-            // TODO
+            Layer newLayer = new Layer(this, this.hiddenLayers.Count);
+            newLayer.setNumberOfWeights(this.outputLayer.getNumberOfWeights()); // new layer nr of weights := output layer nr of weights
+
+            this.outputLayer.setNumberOfWeights(1); // set the number of weights on OL to 1
+
+            this.hiddenLayers.Add(newLayer); // add the new layer at the end of HL list
         }
 
+        /// <summary>
+        /// Deletes <b>the last</b> layer from the list of hidden layers
+        /// </summary>
         public void decreaseNumberOfHiddenLayers () {
-            // TODO
+            int lastPosition = this.hiddenLayers.Count - 1;
+            this.outputLayer.setNumberOfWeights(this.hiddenLayers[lastPosition].getNumberOfWeights()); // nr of weights on OL := nr of weights on last HL
+
+            this.hiddenLayers.RemoveAt(lastPosition); // delete the last layer from HL list
         }
     }
 }

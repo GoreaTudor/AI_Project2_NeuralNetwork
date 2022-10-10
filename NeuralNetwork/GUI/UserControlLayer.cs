@@ -7,15 +7,19 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using NeuralNetwork.AI;
 
 namespace NeuralNetwork.GUI {
     public partial class UserControlLayer : UserControl {
+        private MyNeuralNetwork network;
+
         private int layerNumber;
         private int numberOfNeurons = 0;
 
         public UserControlLayer (int layerNumber) {
             InitializeComponent();
 
+            //this.network = network;
             this.layerNumber = layerNumber;
             this.lbl_layerName.Text = getName();
 
