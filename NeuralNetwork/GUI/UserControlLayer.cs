@@ -87,7 +87,8 @@ namespace NeuralNetwork.GUI {
         }
 
         private void options () {
-            ;
+            LayerOptionsForm form = new LayerOptionsForm(this.network, this.layerNumber);
+            form.ShowDialog();
         }
     }
 }

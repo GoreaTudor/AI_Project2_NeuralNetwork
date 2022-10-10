@@ -51,6 +51,12 @@
     <Compile Include="AI\MyNeuralNetwork.cs" />
     <Compile Include="AI\Neuron.cs" />
     <Compile Include="GlobalStuff.cs" />
+    <Compile Include="GUI\LayerOptionsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI\LayerOptionsForm.Designer.cs">
+      <DependentUpon>LayerOptionsForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="GUI\MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -68,6 +74,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="GUI\LayerOptionsForm.resx">
+      <DependentUpon>LayerOptionsForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="GUI\MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
