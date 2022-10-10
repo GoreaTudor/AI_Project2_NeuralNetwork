@@ -51,6 +51,12 @@
     <Compile Include="AI\MyNeuralNetwork.cs" />
     <Compile Include="AI\Neuron.cs" />
     <Compile Include="GlobalStuff.cs" />
+    <Compile Include="GUI\ChangeWeightsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI\ChangeWeightsForm.Designer.cs">
+      <DependentUpon>ChangeWeightsForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="GUI\LayerOptionsForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -72,8 +78,17 @@
     <Compile Include="GUI\UserControlLayer.Designer.cs">
       <DependentUpon>UserControlLayer.cs</DependentUpon>
     </Compile>
+    <Compile Include="GUI\WeightListItem.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="GUI\WeightListItem.Designer.cs">
+      <DependentUpon>WeightListItem.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="GUI\ChangeWeightsForm.resx">
+      <DependentUpon>ChangeWeightsForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="GUI\LayerOptionsForm.resx">
       <DependentUpon>LayerOptionsForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -82,6 +97,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="GUI\UserControlLayer.resx">
       <DependentUpon>UserControlLayer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\WeightListItem.resx">
+      <DependentUpon>WeightListItem.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

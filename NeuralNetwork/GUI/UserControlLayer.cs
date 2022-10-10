@@ -69,7 +69,13 @@ namespace NeuralNetwork.GUI {
 
 
         private void addNeuron() {
-            MyButton button = new MyButton(layerNumber, numberOfNeurons);
+            int neuronNumber = numberOfNeurons;
+            MyButton button = new MyButton(layerNumber, neuronNumber);
+
+            button.Click += (sender, e) => {
+                ChangeWeightsForm form = new ChangeWeightsForm (network, layerNumber, neuronNumber);
+                form.ShowDialog ();
+            };
 
             if (layerNumber < 0) {
                 button.Enabled = false;
@@ -87,8 +93,8 @@ namespace NeuralNetwork.GUI {
         }
 
         private void options () {
-            LayerOptionsForm form = new LayerOptionsForm(this.network, this.layerNumber);
-            form.ShowDialog();
+            LayerOptionsForm form = new LayerOptionsForm (this.network, this.layerNumber);
+            form.ShowDialog ();
         }
     }
 }

@@ -111,6 +111,7 @@ namespace NeuralNetwork.AI {
             this.hiddenLayers.RemoveAt(lastPosition); // delete the last layer from HL list
         }
 
+
         public void updateFunctions (
             int layerNumber, 
             InputFunction inputf, ActivationFunction activationf, OutputFunction outputf, 
@@ -129,6 +130,30 @@ namespace NeuralNetwork.AI {
             layer.setInputFunction(inputf);
             layer.setActivationFunction(activationf, theta, g);
             layer.setOutputFunction(outputf);
+        }
+
+
+        public List <Double> getWeights (int layerNumber, int neuronNumber) {
+            Layer layer = findLayer (layerNumber);
+            return layer.getWeights (neuronNumber);
+        }
+
+        public void setWeights (int layerNumber, int neuronNumber, List <Double> weights) {
+            Layer layer = findLayer (layerNumber);
+            layer.setWeights (neuronNumber, weights);
+        }
+
+        private Layer findLayer(int layerNumber) {
+            if (layerNumber == 0) { // OL
+                return this.outputLayer;
+
+            } else if (layerNumber > 0) { // HL
+                int position = layerNumber - 1;
+                return this.hiddenLayers[position];
+
+            } else { // cannot change input layer
+                return null;
+            }
         }
     }
 }

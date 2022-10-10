@@ -209,5 +209,14 @@ namespace NeuralNetwork.AI {
                 }
             }
         }
+
+
+        public List <Double> getWeights (int neuronNumber) {
+            return neurons[neuronNumber].weights;
+        }
+
+        public void setWeights (int neuronNumber, List <Double> weights) {
+            neurons[neuronNumber].weights = weights;
+        }
     }
 }

@@ -21,3 +21,5 @@ C:\Users\Tudor\source\repos\AI_Project2\AI_Project2_NeuralNetwork\NeuralNetwork\
 C:\Users\Tudor\source\repos\AI_Project2\AI_Project2_NeuralNetwork\NeuralNetwork\obj\Debug\NeuralNetwork.exe
 C:\Users\Tudor\source\repos\AI_Project2\AI_Project2_NeuralNetwork\NeuralNetwork\obj\Debug\NeuralNetwork.pdb
 C:\Users\Tudor\source\repos\AI_Project2\AI_Project2_NeuralNetwork\NeuralNetwork\obj\Debug\NeuralNetwork.GUI.LayerOptionsForm.resources
+C:\Users\Tudor\source\repos\AI_Project2\AI_Project2_NeuralNetwork\NeuralNetwork\obj\Debug\NeuralNetwork.GUI.ChangeWeightsForm.resources
+C:\Users\Tudor\source\repos\AI_Project2\AI_Project2_NeuralNetwork\NeuralNetwork\obj\Debug\NeuralNetwork.GUI.WeightListItem.resources
