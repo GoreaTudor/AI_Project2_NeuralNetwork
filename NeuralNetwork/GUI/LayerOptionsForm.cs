@@ -27,6 +27,7 @@ namespace NeuralNetwork.GUI {
         private void btn_save_Click (object sender, EventArgs e) {
             setFunctions();
             this.Close();
+            GlobalStuff.changeStatus ("Functions updated");
         }
 
         private void btn_cancel_Click (object sender, EventArgs e) {

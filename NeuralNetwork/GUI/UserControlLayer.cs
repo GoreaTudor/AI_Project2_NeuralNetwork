@@ -52,7 +52,8 @@ namespace NeuralNetwork.GUI {
 
         private void btn_add_Click (object sender, EventArgs e) {
             network.increaseNumberOfNeurons(layerNumber);
-            addNeuron(); 
+            addNeuron();
+            GlobalStuff.changeStatus ("Neuron added");
         }
 
         private void btn_delete_Click (object sender, EventArgs e) {
@@ -89,6 +90,10 @@ namespace NeuralNetwork.GUI {
             if (numberOfNeurons > 1) {
                 numberOfNeurons--;
                 layerFlowLayoutPanel.Controls.RemoveAt(numberOfNeurons);
+                GlobalStuff.changeStatus ("Deleted neuron");
+
+            } else {
+                GlobalStuff.changeStatus ("Cannot delete the first neuron");
             }
         }
 

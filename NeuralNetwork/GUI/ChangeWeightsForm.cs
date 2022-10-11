@@ -35,6 +35,7 @@ namespace NeuralNetwork.GUI {
         private void btn_save_Click (object sender, EventArgs e) {
             updateWeights ();
             this.Close ();
+            GlobalStuff.changeStatus ("Weights changed");
         }
 
         private void btn_cancel_Click (object sender, EventArgs e) {
