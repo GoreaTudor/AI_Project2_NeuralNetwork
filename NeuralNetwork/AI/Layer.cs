@@ -10,18 +10,19 @@ namespace NeuralNetwork.AI {
         public Function <Double, Double> ActivationFunction { get; set; }
         public Function <Double, Double> OutputFunction { get; set; }
 
-        private InputFunction InputFunctionType;
-        private ActivationFunction ActivationFunctionType;
-        private OutputFunction OutputFunctionType;
+        public InputFunction InputFunctionType { get; set; }
+        public ActivationFunction ActivationFunctionType { get; set; }
+        public OutputFunction OutputFunctionType { get; set; }
+
+        public Double theta { get; set; }
+        public Double g { get; set; }
 
         private MyNeuralNetwork parent;
-        private int layerNumber;
-        private List <Neuron> neurons;
-        private Double theta = 0.0;
-        private Double g = 1.0;
-        
+        private List<Neuron> neurons;
+        private int layerNumber;     
 
-        public Layer(MyNeuralNetwork parent, int layerNumber) {
+
+    public Layer (MyNeuralNetwork parent, int layerNumber) {
             this.parent = parent;
             this.layerNumber = layerNumber;
             this.neurons = new List<Neuron>();

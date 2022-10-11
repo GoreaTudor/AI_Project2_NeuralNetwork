@@ -112,24 +112,29 @@ namespace NeuralNetwork.AI {
         }
 
 
-        public void updateFunctions (
+        public void setFunctions (
             int layerNumber, 
             InputFunction inputf, ActivationFunction activationf, OutputFunction outputf, 
             Double theta, Double g
         ) {
-            Layer layer;
-
-            if (layerNumber == 0) { // update the output layer
-                layer = this.outputLayer;
-
-            } else { // update the hidden layer
-                int position = layerNumber - 1;
-                layer = this.hiddenLayers[position];
-            }
+            Layer layer = findLayer (layerNumber);
 
             layer.setInputFunction(inputf);
             layer.setActivationFunction(activationf, theta, g);
             layer.setOutputFunction(outputf);
+        }
+
+        public LayerTO getFunctions (int layerNumber) {
+            Layer layer = findLayer (layerNumber);
+
+            LayerTO layerTO = new LayerTO ();
+            layerTO.inputFunctionType = layer.InputFunctionType;
+            layerTO.activationFunctionType = layer.ActivationFunctionType;
+            layerTO.outputFunctionType = layer.OutputFunctionType;
+            layerTO.theta = layer.theta;
+            layerTO.g = layer.g;
+
+            return layerTO;
         }
 
 

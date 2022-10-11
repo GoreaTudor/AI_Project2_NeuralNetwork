@@ -48,6 +48,7 @@
   <ItemGroup>
     <Compile Include="AI\Function.cs" />
     <Compile Include="AI\Layer.cs" />
+    <Compile Include="AI\LayerTO.cs" />
     <Compile Include="AI\MyNeuralNetwork.cs" />
     <Compile Include="AI\Neuron.cs" />
     <Compile Include="GlobalStuff.cs" />

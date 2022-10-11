@@ -20,12 +20,12 @@ namespace NeuralNetwork.GUI {
             this.network = network;
             this.layerNumber = layerNumber;
 
-            this.comboBox_inputFunction.SelectedIndex = 0;
-            this.comboBox_activationFunction.SelectedIndex = 0;
+            this.getAndDisplayFunctions ();
         }
 
+
         private void btn_save_Click (object sender, EventArgs e) {
-            update();
+            setFunctions();
             this.Close();
         }
 
@@ -33,7 +33,8 @@ namespace NeuralNetwork.GUI {
             this.Close();
         }
 
-        private void update() {
+
+        private void setFunctions () {
             InputFunction inputFunction;
             switch (this.comboBox_inputFunction.SelectedIndex) {
                 case 1: { inputFunction = InputFunction.Prod; } break;
@@ -70,7 +71,68 @@ namespace NeuralNetwork.GUI {
             Double theta = (Double) this.numericUpDown_theta.Value;
             Double g = (Double) this.numericUpDown_g.Value;
 
-            network.updateFunctions (layerNumber, inputFunction, activationFunction, outputFunction, theta, g);
+            network.setFunctions (layerNumber, inputFunction, activationFunction, outputFunction, theta, g);
+        }
+
+        private void getAndDisplayFunctions () {
+            LayerTO layerTO = network.getFunctions (layerNumber);
+
+            switch (layerTO.inputFunctionType) {
+                case InputFunction.Prod: {
+                    this.comboBox_inputFunction.SelectedIndex = 1;
+                } break;
+
+                case InputFunction.Min: {
+                    this.comboBox_inputFunction.SelectedIndex = 2;
+                } break;
+
+                case InputFunction.Max: {
+                    this.comboBox_inputFunction.SelectedIndex = 3;
+                } break;
+
+                case InputFunction.Sum:
+                default: {
+                    this.comboBox_inputFunction.SelectedIndex = 0;
+                }
+                break;
+            }
+
+            switch (layerTO.activationFunctionType) {
+                case ActivationFunction.Step: {
+                    this.comboBox_activationFunction.SelectedIndex = 0;
+                } break;
+
+                case ActivationFunction.Sign: {
+                    this.comboBox_activationFunction.SelectedIndex = 1;
+                } break;
+
+                case ActivationFunction.TanH: {
+                    this.comboBox_activationFunction.SelectedIndex = 3;
+                } break;
+
+                case ActivationFunction.Linear: {
+                    this.comboBox_activationFunction.SelectedIndex = 4;
+                } break;
+
+                case ActivationFunction.Sigmoid:
+                default: {
+                    this.comboBox_activationFunction.SelectedIndex = 2;
+                } break;
+            }
+
+            switch (layerTO.outputFunctionType) {
+                case OutputFunction.Binary: {
+                    this.checkBox_outputFunction.Checked = true;
+                } break;
+
+                case OutputFunction.Real:
+                default: {
+                    this.checkBox_outputFunction.Checked = false;
+                } break;
+            }
+
+            this.numericUpDown_theta.Value = (Decimal) layerTO.theta;
+            this.numericUpDown_g.Value = (Decimal) layerTO.g;
         }
     }
 }
