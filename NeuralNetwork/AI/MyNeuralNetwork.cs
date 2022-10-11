@@ -160,5 +160,10 @@ namespace NeuralNetwork.AI {
                 return null;
             }
         }
+
+
+        public int getNumberOfInputs () {
+            return this.inputLayer.getNumberOfNeurons();
+        }
     }
 }

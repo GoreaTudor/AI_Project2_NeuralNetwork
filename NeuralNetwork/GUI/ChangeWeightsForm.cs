@@ -25,9 +25,10 @@ namespace NeuralNetwork.GUI {
             /// Prepare the list of weights ///
             List <Double> weights = network.getWeights (layerNumber, neuronNumber);
 
+            int value = 0;
             foreach (Double weight in weights) {
-                WeightListItem weightListItem = new WeightListItem ();
-                weightListItem.setWeightValue (weight);
+                ValueListItem weightListItem = new ValueListItem ("W" + (value++));
+                weightListItem.setValue (weight);
                 this.flowLayoutPanel_weights.Controls.Add (weightListItem);
             }
         }
@@ -45,9 +46,9 @@ namespace NeuralNetwork.GUI {
         private void updateWeights() {
             List <Double> newWeights = new List <Double> ();
             foreach (Control item in this.flowLayoutPanel_weights.Controls) {
-                if (item is WeightListItem) {
-                    WeightListItem weightListItem = (WeightListItem) item;
-                    newWeights.Add (weightListItem.getWeightValue ());
+                if (item is ValueListItem) {
+                    ValueListItem weightListItem = (ValueListItem) item;
+                    newWeights.Add (weightListItem.getValue ());
                 }
             }
             network.setWeights (layerNumber, neuronNumber, newWeights);

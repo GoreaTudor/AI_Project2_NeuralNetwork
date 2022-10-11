@@ -219,5 +219,9 @@ namespace NeuralNetwork.AI {
         public void setWeights (int neuronNumber, List <Double> weights) {
             neurons[neuronNumber].weights = weights;
         }
+
+        public int getNumberOfNeurons () {
+            return this.neurons.Count;
+        }
     }
 }

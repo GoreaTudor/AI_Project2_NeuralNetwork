@@ -48,7 +48,8 @@ namespace NeuralNetwork {
         }
 
         private void btn_feedforward_Click (object sender, EventArgs e) {
-            ;
+            FeedforwardForm form = new FeedforwardForm (network);
+            form.ShowDialog ();
         }
 
 
